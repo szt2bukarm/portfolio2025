@@ -1,0 +1,64 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html{
+  background-color: #161616;
+}
+
+body{
+  /* overflow: hidden; */
+  height: 100%;
+  background-color: #000;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+@font-face {
+  font-family: "Mori-Extralight";
+  src: url("./../public/fonts/PPMori-Extralight.otf");
+}
+
+@font-face {
+  font-family: "Mori-ExtralightItalic";
+  src: url("./../public/fonts/PPMori-ExtralightItalic.otf");
+}
+
+@font-face {
+  font-family: "Mori-Regular";
+  src: url("./../public/fonts/PPMori-Regular.otf");
+}
+
+@font-face {
+  font-family: "Mori-RegularItalic";
+  src: url("./../public/fonts/PPMori-RegularItalic.otf");
+}
+
+@font-face {
+  font-family: "Mori-SemiBold";
+  src: url("./../public/fonts/PPMori-SemiBold.otf");
+}
+
+@font-face {
+  font-family: "Mori-SemiBoldItalic";
+  src: url("./../public/fonts/PPMori-SemiBoldItalic.otf");
+}
+
+:root {
+  --large: 150.79px;
+  --large2: 125.66px;
+  --large3: 104.72px;
+  --medium: 87.26px;
+  --medium2: 72.72px;
+  --medium3: 60.6px;
+  --medium4: 50.5px;
+  --small: 42.88px;
+  --small2: 35px;
+  --small3: 29.5px;
+  --small4: 22.75px;
+  --small5: 18px;
+}
