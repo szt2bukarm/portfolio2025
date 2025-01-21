@@ -13,6 +13,12 @@ const Wrapper = styled.div`
     z-index: 1;
     border-radius: 20px;
     overflow: hidden;
+    transition: filter 0.2s;
+
+    &:hover {
+        cursor: pointer;
+        filter: brightness(120%);
+    }
 
     @media screen and (max-width: 768px) {
         width: 90vw;
