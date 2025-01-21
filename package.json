@@ -6,12 +6,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy": "gh-pages -d build"
   },
   "dependencies": {
     "@react-three/fiber": "^8.17.10",
     "@studio-freight/lenis": "^1.0.42",
     "@studio-freight/react-lenis": "^0.0.47",
+    "gh-pages": "^6.3.0",
     "gsap": "^3.12.7",
     "next": "14.2.22",
     "react": "^18",

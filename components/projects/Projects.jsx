@@ -157,7 +157,7 @@ export default function Projects() {
     const wrapperRef = useRef(null);
     const bgRef = useRef(null);
     const lenis = useLenis();
-    const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+    const [screenWidth, setScreenWidth] = useState(typeof window !== "undefined" ? window.innerWidth : 0);
 
     useEffect(() => {
         if (!lenis) return;
@@ -169,6 +169,7 @@ export default function Projects() {
     },[lenis])
 
     useEffect(() => {
+        if (typeof window == "undefined") return;
         const handleResize = () => {
             setScreenWidth(window.innerWidth);
         };

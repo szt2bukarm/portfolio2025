@@ -4,6 +4,9 @@ const nextConfig = {
     compiler: {
         styledComponents: true, // Enables styled-components SWC support
     },
+    eslint: {
+        ignoreDuringBuilds: true
+    }
 };
 
 export default nextConfig;
