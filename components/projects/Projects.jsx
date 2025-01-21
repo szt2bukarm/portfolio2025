@@ -115,7 +115,7 @@ const Metadata = styled.p`
 const list = [
     {
         title: "Benjo",
-        image: "benjo.png",
+        image: "benjo.jpg",
         stack: ["HTML","CSS","JS","React","NodeJS"],
         platform: "web",
         year: "2024",
@@ -123,7 +123,7 @@ const list = [
     },
     {
         title: "UNO",
-        image: "uno.png",
+        image: "uno.jpg",
         stack: ["HTML","CSS","JS","React","NodeJS"],
         platform: "web",
         year: "2024",
@@ -131,7 +131,7 @@ const list = [
     },
     {
         title: "Benjo - iOS",
-        image: "benjomobile.png",
+        image: "benjomobile.jpg",
         stack: ["JS","ReactNative","NodeJS"],
         platform: "mobile",
         year: "2024",

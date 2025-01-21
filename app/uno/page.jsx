@@ -124,7 +124,7 @@ export default function Uno() {
             <Cover />
             <Name />
             <ImageWrapper ref={imageRef}>
-                <Image src="uno.png" alt="" />
+                <Image src="uno.jpg" alt="" />
             </ImageWrapper>
             <Title title={"UNO"} stack={["HTML", "CSS", "JS","React","NodeJS"]} year={"2024"} platform={"Web"} />
             <Info title={"UNO"} description={"A recreation of the popular card game UNO written in React. Multiplayer games are also supported through the use of Socket.io."} stack={["HTML", "CSS", "JS","React","NodeJS","GSAP","Socket.io"]} year={"2024"} platform={"Web"} />
@@ -136,7 +136,7 @@ export default function Uno() {
             </div>
             <Links frontend={"https://github.com/szt2bukarm/uno"} backend={"https://github.com/szt2bukarm/uno-server"} demo={"https://szt2bukarm.github.io/uno-prod/"} />
 
-            <Next project={"Benjo - iOS"} slug={"benjomobile"} image={"benjomobile.png"} />
+            <Next project={"Benjo - iOS"} slug={"benjomobile"} image={"benjomobile.jpg"} />
         </Wrapper>
     )   
 }

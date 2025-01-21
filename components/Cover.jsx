@@ -35,9 +35,9 @@ const Loader = styled.p`
 `
 
 const fileNames = [
-  "benjo.png",
-  "uno.png",
-  "benjomobile.png",
+  "benjo.jpg",
+  "uno.jpg",
+  "benjomobile.jpg",
   "benjo1.png",
   "uno1.png",
   "benjo2.png",

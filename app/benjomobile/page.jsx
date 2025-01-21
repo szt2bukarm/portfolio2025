@@ -114,7 +114,7 @@ export default function Benjo() {
             <Cover />
             <Name />
             <ImageWrapper ref={imageRef}>
-                <Image src="benjomobile.png" alt="" />
+                <Image src="benjomobile.jpg" alt="" />
             </ImageWrapper>
             <Title title={"Benjo - iOS"} stack={["JS","ReactNative","NodeJS"]} year={"2024"} platform={"Mobile"} />
             <Info title={"Benjo - iOS"} description={"Benjo is a music streaming app which takes Spotify metadata and matches it with the corresponding song on YouTube, this time built for mobile."} stack={["JS","React Native","NodeJS","Express","MongoDB","Reanimated"]} year={"2024"} platform={"Mobile"} />
@@ -125,7 +125,7 @@ export default function Benjo() {
             <iframe style={{width: "100%",height: "100%"}} src="https://player.vimeo.com/video/1048207311?h=cf7d4db334&app_id=58479&muted=1&autoplay=1&loop=1&background=1" class="embed-content" frameBorder={0} ></iframe>
             </div>
 
-            <Next project={"Benjo"} slug={"benjo"} image={"benjo.png"} />
+            <Next project={"Benjo"} slug={"benjo"} image={"benjo.jpg"} />
         </Wrapper>
     )   
 }

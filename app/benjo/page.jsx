@@ -129,7 +129,7 @@ export default function Benjo() {
             <Cover />
             <Name />
             <ImageWrapper ref={imageRef}>
-                <Image src="benjo.png" alt="" />
+                <Image src="benjo.jpg" alt="" />
             </ImageWrapper>
             <Title title={"Benjo"} stack={["HTML", "CSS", "JS","React","NodeJS"]} year={"2024"} platform={"Web"} />
             <Info title={"Benjo"} description={"Benjo is a music streaming app which takes Spotify metadata and matches it with the corresponding song on YouTube."} stack={["HTML", "CSS", "JS","React","NodeJS","Express","MongoDB","GSAP"]} year={"2024"} platform={"Web"} />
@@ -141,7 +141,7 @@ export default function Benjo() {
             </div>
             <Links frontend={"https://github.com/szt2bukarm/Benjov2/"} backend={"https://github.com/szt2bukarm/BenjoAPI"} demo={"https://benjov2.netlify.app/"} />
 
-            <Next project={"UNO"} slug={"uno"} image={"uno.png"} />
+            <Next project={"UNO"} slug={"uno"} image={"uno.jpg"} />
         </Wrapper>
     )   
 }
