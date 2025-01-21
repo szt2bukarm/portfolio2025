@@ -53,6 +53,7 @@ const SubText = styled.p`
     font-size: var(--small4);
     font-family: "Mori-Regular";
     color: #ffffff;
+    margin-bottom: 20px;
 `
 
 
