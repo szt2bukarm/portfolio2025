@@ -3,6 +3,7 @@ import styled from "styled-components";
 import gsap from "gsap";
 import { CustomEase } from "gsap/all";
 import { useStore } from "@/store";
+import { usePathname, useRouter } from "next/navigation";
 gsap.registerPlugin(CustomEase);
 
 const Wrapper = styled.div`
@@ -14,7 +15,7 @@ const Wrapper = styled.div`
   height: 100dvh;
   z-index: 5;
   background-color: #161616;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); */
   rotate: 180deg;
   display: flex;
   align-items: center;
@@ -49,8 +50,10 @@ const fileNames = [
 
 export default function Cover() {
   const [progress, setProgress] = useState(0);
-  const {setLoaded,loaded,lowerCover} = useStore();
+  const {setLoaded,loaded,lowerCover,setLowerCover} = useStore();
   const coverRef = useRef(null);
+  const pathname = usePathname();
+  const router = useRouter();
   const [hideLoader,setHideLoader] = useState(loaded);
   gsap.registerEase("customEase", "M0,0 C0.075,0.82 0.165,1 1,1");
 
@@ -60,19 +63,26 @@ export default function Cover() {
             setHideLoader(false);
             setTimeout(() => {
                 gsap.set(coverRef.current, {
-                    clipPath: "polygon(0 0, 100% 0, 100% 0, 0 0)",
+                    top: window.innerHeight * -1
                 })
                 gsap.to(coverRef.current, {
-                    clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)",
-                    duration: 1,
-                    ease: "customEase",
+                  top: 0,
+                  duration: 0.5,
+                  ease: "customEase",
+                  onComplete: () => {
+                    router.push("/")
+                    setTimeout(() => {
+                        setHideLoader(true);
+                        setLowerCover(false);
+                    }, 1000);
+                  }
                 })
             }, 1);
         }
     },[lowerCover])
 
   useEffect(() => {
-    if (lowerCover) return;
+    if (lowerCover || loaded) return;
     const preloadImages = async () => {
       const totalFiles = fileNames.length;
       let loadedFiles = 0;
@@ -102,12 +112,12 @@ export default function Cover() {
         await Promise.all(promises);
         setLoaded(true);
         gsap.set(coverRef.current, {
-          clipPath: "polygon(100% 0, 0 0, 0 100%, 100% 100%)",
+          top: 0
         });
         gsap.to(coverRef.current, {
-          clipPath: "polygon(100% 100%, 0 100%, 0 100%, 100% 100%)",
+          top: window.innerHeight * -1,
           duration: 1,
-          delay: 1,
+          delay: 0.25,
           ease: "customEase",
           onComplete: () => setProgress(100),
         });
@@ -119,11 +129,20 @@ export default function Cover() {
     preloadImages();
   }, []);
 
+  useEffect(() => {
+    if (loaded) {
+      gsap.to(coverRef.current, {
+        top: window.innerHeight * -1,
+        duration: 0.5,
+        ease: "customEase",
+      });
+    }
+  },[pathname])
+
   return (
     <>
     {!hideLoader && (
         <Wrapper ref={coverRef}>
-            {!lowerCover && <Loader>{progress}%</Loader>}
         </Wrapper>
     )}
     </>

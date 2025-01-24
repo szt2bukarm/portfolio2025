@@ -45,8 +45,6 @@ export default function PageWrapper({children}) {
   const nameRef = useRef(null);
   const { loaded, setAbout, about } = useStore();
   const aboutRef = useRef(null);
-  const disableAboutClickRef = useRef(false); 
-  const [aboutText, setAboutText] = useState(about ? "CLOSE" : "ABOUT");
   const router = useRouter();
 
   useEffect(() => {
@@ -59,15 +57,13 @@ export default function PageWrapper({children}) {
       gsap.to(nameRef.current, {
         y: 0,
         duration: 1,
-        delay: 1,
+        delay: 0.3,
         ease: "customEase",
       });
     }
   }, [loaded]);
 
   const handleAboutClick = () => {
-    if (disableAboutClickRef.current) return;
-    disableAboutClickRef.current = true;
     setAbout(true);
     gsap.to(aboutRef.current, {
       opacity: 0,
@@ -80,12 +76,13 @@ export default function PageWrapper({children}) {
 
   useEffect(() => {
     document.documentElement.style.backgroundColor = "#000";
-    if (loaded && pathname === "/") location.reload();
+    if (pathname !== "/about") {
+      gsap.to(aboutRef.current, {
+        opacity: 1,
+        duration: 0.3,
+      })
+    }
   }, [pathname]);
-
-  useEffect(() => {
-    console.log(router.pathname)
-  },[router.pathname])
 
   return (
     <div>
@@ -94,7 +91,7 @@ export default function PageWrapper({children}) {
       <Name ref={nameRef}>BUKVIC ARMIN</Name>
       }
       <AboutButton ref={aboutRef} onClick={handleAboutClick}>
-        {pathname === "/about" ? "" : "ABOUT"}
+        ABOUT
       </AboutButton>
       {pathname === "/" ? <Projects /> : children}
     </div>

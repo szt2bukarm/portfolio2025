@@ -1,5 +1,5 @@
 import { useStore } from "@/store"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import styled from "styled-components"
 
 const Text = styled.p`
@@ -20,14 +20,12 @@ const Text = styled.p`
 `
 
 export default function Name () {
-    const router = useRouter()
-    const {setLowerCover} = useStore();
+    const pathname = usePathname();
+    const {setLowerCover,setAbout} = useStore();
 
     const handleClick = () => {
+        if (pathname === "/about") setAbout(false);
         setLowerCover(true);
-        setTimeout(() => {
-            router.push("/");
-        }, 1500);
     }
 
     return (

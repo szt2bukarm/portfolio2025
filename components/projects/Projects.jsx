@@ -60,7 +60,7 @@ const ProjectList = styled.div`
     justify-content: center;
     align-items: center;
     gap: 200px;
-    /* padding-bottom: 300px; */
+    /* padding-bottom: 500px; */
     perspective: 300px;
 
     @media screen and (max-width: 768px) {
@@ -203,7 +203,7 @@ export default function Projects() {
     useEffect(() => {
         gsap.set(projectRef.current,{
             transform: 'rotateX(0deg)',
-            delay: 0.9
+            delay: 0.5
         })
         gsap.set(projectRef.current,{
             transform: 'rotateX(0deg)',
@@ -225,14 +225,7 @@ export default function Projects() {
             });
         })
         setLastScrollX(currentScrollX);
-    }
-
-    useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    })
+    } 
 
     useEffect(() => {
         if (!loaded){
@@ -246,58 +239,71 @@ export default function Projects() {
         if (loaded)
             gsap.to([listRef.current,infoRef.current], {
                 y: 0,
-                delay: 1,
+                delay: 0.3,
                 duration: 1,
                 ease: "customEase"
             })
     },[loaded])
 
     useEffect(() => {
-            let lastIndex = 0;
-            ScrollTrigger.create({
-                trigger: listRef.current,
-                start: screenWidth < 768 ? "top-=500 top" : "top-=400 top",
-                end: screenWidth < 768 ? "bottom-=170 bottom" : "bottom-=600 bottom",
-                onUpdate: (self) => {
-                    const progress = self.progress;
-                    const index = Math.floor(progress * (list.length - 1));
-            
-                    if (index !== lastIndex) {
-                      lastIndex = index;
-                        gsap.to(bgRef.current, {
-                            opacity: 0,
-                            duration: 0.3
-                        })
-                      gsap.to(infoRef.current, {
-                        css: {
-                            // transform: 'translate(-50%, -91%)'
-                            filter: screenWidth > 768 ? "blur(10px) drop-shadow(0 0 20px #000)" : ""
-                        },
-                        duration: 0.1,
-                        onComplete: () => {
-                          setCurrentText(list[index].title);
-                            setCurrentPlatform(list[index].platform);
-                            setCurrentStack(list[index].stack);
-                            setCurrentYear(list[index].year);
-                            setCurrentIndex(index);
-    
-                            gsap.to(bgRef.current, {
-                                opacity: 0.3,
-                                duration: 0.3
-                            })
-    
-                            gsap.to(infoRef.current, {
-                            css: {
-                                filter: "blur(0px) drop-shadow(0 0 20px #000)"
-                            },
-                            duration: 0.3
-                          });
-                        }
-                      });
-                    }
-                }        
+        gsap.set(infoRef.current, {
+            opacity: 0
+        })
+        const animation = (i) => {
+            gsap.to(bgRef.current, {
+                opacity: 0,
+                duration: 0.3
             })
-    },[])
+          gsap.to(infoRef.current, {
+            css: {
+                opacity: 1,
+                // transform: 'translate(-50%, -91%)'
+                filter: screenWidth > 768 ? "blur(10px) drop-shadow(0 0 20px #000)" : ""
+            },
+            duration: 0.1,
+            onComplete: () => {
+              setCurrentText(list[i].title);
+                setCurrentPlatform(list[i].platform);
+                setCurrentStack(list[i].stack);
+                setCurrentYear(list[i].year);
+                setCurrentIndex(i);
+
+                gsap.to(bgRef.current, {
+                    opacity: 0.3,
+                    duration: 0.3
+                })
+
+                gsap.to(infoRef.current, {
+                css: {
+                    filter: "blur(0px) drop-shadow(0 0 20px #000)"
+                },
+                duration: 0.3
+              });
+            }
+          });
+        }
+        let scrollTriggers = [];
+        if (!loaded) return;
+        setTimeout(() => {
+            projectRef.current.forEach((el,i) => {
+                scrollTriggers[i] = ScrollTrigger.create({
+                    trigger: el,
+                    start: "top 50%",
+                    end: "bottom 50%",
+                    onEnter: () => {
+                        animation(i);
+                    },
+                    onEnterBack: () => {
+                        animation(i);
+                    }
+                })
+            })
+        }, 750);
+
+        return () => {
+            scrollTriggers.forEach((el) => el.kill());
+        }
+    },[loaded])
 
     const addPadding = () => {
         listRef.current.style.paddingBottom = "300px";
@@ -315,12 +321,6 @@ export default function Projects() {
                 }
             })
         } else {
-            gsap.set(wrapperRef.current, {
-                display: "block"
-            })
-            gsap.set(projectRef.current, {
-                transform: 'rotateX(0deg)'
-            })
             gsap.to(wrapperRef.current, {
                 opacity: 1,
                 duration: 0.5,
