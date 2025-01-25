@@ -4,7 +4,8 @@ import gsap from "gsap"
 
 const Wrapper = styled.div`
     min-height: 100%;
-    width: 96%;
+    width: 100%;
+    padding-inline: 20px;
     margin-inline: auto;
     margin-top: 200px;
 `
@@ -34,6 +35,7 @@ const Title = styled.p`
     font-size: var(--medium);
     font-family: "Mori-SemiBold";
     color: #fff;
+    margin-bottom: 20px;
 `
 
 const GridItem = styled.div`

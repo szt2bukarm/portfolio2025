@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/all";
 import { useStore } from "@/store";
 import { usePathname, useRouter } from "next/navigation";
+import { useGLTF } from "@react-three/drei";
 gsap.registerPlugin(CustomEase);
 
 const Wrapper = styled.div`
@@ -50,20 +51,28 @@ const fileNames = [
 
 export default function Cover() {
   const [progress, setProgress] = useState(0);
+  const {setModel} = useStore();
   const {setLoaded,loaded,lowerCover,setLowerCover} = useStore();
   const coverRef = useRef(null);
   const pathname = usePathname();
   const router = useRouter();
+  let scene;
+  if(typeof window !== "undefined") {
+     scene = useGLTF("model2.glb").scene;
+  }
   const [hideLoader,setHideLoader] = useState(loaded);
   gsap.registerEase("customEase", "M0,0 C0.075,0.82 0.165,1 1,1");
 
+  useEffect(() => {
+    if (scene) setModel(scene)
+  },[scene])
 
     useEffect(() => {
         if (lowerCover) {
             setHideLoader(false);
             setTimeout(() => {
                 gsap.set(coverRef.current, {
-                    top: window.innerHeight * -1
+                    top: window.innerHeight * 1.3
                 })
                 gsap.to(coverRef.current, {
                   top: 0,
@@ -115,7 +124,7 @@ export default function Cover() {
           top: 0
         });
         gsap.to(coverRef.current, {
-          top: window.innerHeight * -1,
+          top: window.innerHeight * -1.3,
           duration: 1,
           delay: 0.25,
           ease: "customEase",
@@ -132,8 +141,9 @@ export default function Cover() {
   useEffect(() => {
     if (loaded) {
       gsap.to(coverRef.current, {
-        top: window.innerHeight * -1,
-        duration: 0.5,
+        top: window.innerHeight * -1.3,
+        duration: 1,
+        delay: 0.25,
         ease: "customEase",
       });
     }

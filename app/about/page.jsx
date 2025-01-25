@@ -1,11 +1,12 @@
 'use client'
 import gsap from "gsap"
 import { useStore } from "@/store"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import styled, { keyframes } from "styled-components";
 import { useLenis } from "@studio-freight/react-lenis";
 import Name from "@/components/Name";
 import { usePathname } from "next/navigation";
+import Render from "@/components/Render";
 
 // Define keyframes for the aurora animation
 const auroraAnimation = keyframes`
@@ -18,11 +19,11 @@ const auroraAnimation = keyframes`
 const AuroraEffect = styled.div`
   --white: #fff;
   --black: #000;
-  --color1: rgba(181, 59, 246, 0.56);
-  --color2: rgba(129, 149, 248, 0.53);
-  --color3: rgba(147, 239, 253, 0.5);
-  --color4: rgba(195, 181, 253, 0.46);
-  --color5: rgba(170, 96, 250, 0.5);
+  --color1: rgba(246, 140, 59, 0.56);
+  --color2: rgba(248, 238, 129, 0.53);
+  --color3: rgba(253, 237, 147, 0.5);
+  --color4: rgba(253, 181, 181, 0.46);
+  --color5: rgba(250, 96, 96, 0.5);
   --transparent: rgba(0, 0, 0, 0);
 
   --white-gradient: repeating-linear-gradient(
@@ -88,12 +89,16 @@ const AuroraEffect = styled.div`
 
 const Wrapper = styled.div`
     top: 0;
-    margin-top: 150px;
+    margin-top: 200px;
     width: 100vw;
     padding: 20px;
     min-height: 100%;
     pointer-events: auto;
     opacity: 0;
+
+    @media screen and (max-width: 1100px) {
+        margin-top: 70px;
+    }
 `
 
 // const Content = styled.div`
@@ -121,7 +126,7 @@ const AboutMe = styled.div`
     text-align: justify;
     margin-bottom: 50px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1100px) {
         width: 100%;
     }
 `
@@ -130,7 +135,7 @@ const Skills = styled.div`
     width: 250px;
     margin-bottom: 50px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1100px) {
         width: 100%;
     }
 `
@@ -139,7 +144,7 @@ const SkillsWrapper = styled.div`
     display: flex;
     gap: 20px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1100px) {
         flex-direction: column;
     }
 `
@@ -147,7 +152,7 @@ const SkillsWrapper = styled.div`
 const Contact = styled.div`
     width: 500px;
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1100px) {
         width: 100%;
 
     }
@@ -165,7 +170,7 @@ const Link = styled.a`
         text-decoration: underline;
     }
 
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1100px) {
         display: block;
     }
 `
@@ -177,6 +182,7 @@ const Scroll = styled.div`
 `
 
 export default function About() {
+    const {setAbout} = useStore();
     const wrapperRef = useRef(null);
     const text1Ref = useRef([]);
     const text2Ref = useRef([]);
@@ -227,11 +233,18 @@ export default function About() {
         }    
     ,[])
 
+    useEffect(() => {
+        setTimeout(() => {
+            setAbout(false);
+        }, 500);
+    },[])
+
     return (
         <Wrapper ref={wrapperRef}>
             <AuroraEffect />
             <Name />
             {/* <Scroll> */}
+            <Render />
             <AboutMe>
                 <SubTitle>ABOUT</SubTitle>
                 <SubText>{AboutText1.split(" ").map((word, index) => <span ref={(el) => text1Ref.current[index] = el} key={index}>{word} </span>)}</SubText><br></br>

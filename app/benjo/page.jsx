@@ -84,20 +84,12 @@ export default function Benjo() {
     
     useEffect(() => {
         setProjectTransition(false);
-        gsap.to(imageRef.current, {
-            filter: "brightness(300%)",
-            duration: 0.2,
-            delay: 2.3,
-            ease: "customEase",
-            onComplete: () => {
-                gsap.to(imageRef.current, {
-                    filter: "brightness(100%)",
-                    duration: 0.5,
-                    height: "0vh",
-                    ease: "customEase",
-                })
-            }
-        })
+            gsap.to(imageRef.current, {
+                duration: 0.5,
+                delay: 2.5,
+                height: "0vh",
+                ease: "customEase",
+            })
     }, [])
 
     useEffect(() => {
@@ -136,7 +128,7 @@ export default function Benjo() {
             <Images images={["benjo1.png","benjo2.png","benjo3.png"]} />
             <Features features={["Music playback","User authentication","Search","Abilty to like tracks/albums","Ability to create playlists","Abilty to correct tracks in case of invalid indexing","Music recommendation using the Last.FM API"]} />
             
-            <div ref={videoRef} style={{display:"block",width: "96%",height:"50vw",marginInline: "auto",pointerEvents:"none"}}>
+            <div ref={videoRef} style={{display:"block",width: "98%",height:"50vw",marginInline: "auto",pointerEvents:"none"}}>
             <iframe style={{width: "100%",height: "100%"}} src="https://player.vimeo.com/video/1048192700?h=b2349190ff&app_id=58479&muted=1&autoplay=1&loop=1&background=1" class="embed-content" frameBorder={0} ></iframe>
             </div>
             <Links frontend={"https://github.com/szt2bukarm/Benjov2/"} backend={"https://github.com/szt2bukarm/BenjoAPI"} demo={"https://benjov2.netlify.app/"} />

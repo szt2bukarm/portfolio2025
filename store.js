@@ -10,5 +10,7 @@ export const useStore = create((set) => ({
     lowerCover: false,
     setLowerCover: (value) => set({ lowerCover: value }),
     about: false,
-    setAbout: (value) => set({ about: value })
+    setAbout: (value) => set({ about: value }),
+    model: false,
+    setModel: (value) => set({ model: value }),
 }));

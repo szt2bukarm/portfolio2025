@@ -8,14 +8,15 @@ gsap.registerPlugin(ScrollTrigger);
 const Wrapper = styled.div`
     width: 100vw;
     min-height: 100%;
+    padding-inline: 20px;
 `;
 
 const Image = styled.img`
     display: block;
-    width: 96%;
+    width: 100%;
     height: 100%;
     margin-inline: auto;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     opacity: 0; /* Start hidden */
     transform: translateY(50px); /* Start slightly off-screen */
 `;

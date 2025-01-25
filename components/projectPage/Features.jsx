@@ -5,9 +5,10 @@ import { useEffect, useRef } from "react";
 gsap.registerPlugin(ScrollTrigger);
 
 const Wrapper = styled.div`
-    width: 96%;
+    width: 100%;
     min-height: 100%;
     margin-inline: auto;
+    padding-inline: 20px;
     display: flex;
     /* align-items: center; */
     /* justify-content: center; */

@@ -78,21 +78,12 @@ export default function Uno() {
     
     useEffect(() => {
         setProjectTransition(false);
-
-        gsap.to(imageRef.current, {
-            filter: "brightness(300%)",
-            duration: 0.2,
-            delay: 2.3,
-            ease: "customEase",
-            onComplete: () => {
-                gsap.to(imageRef.current, {
-                    filter: "brightness(100%)",
-                    duration: 0.5,
-                    height: "0vh",
-                    ease: "customEase",
-                })
-            }
-        })
+            gsap.to(imageRef.current, {
+                duration: 0.5,
+                delay: 2.5,
+                height: "0vh",
+                ease: "customEase",
+            })
     }, [])
 
     useEffect(() => {
@@ -131,7 +122,7 @@ export default function Uno() {
             <Images images={["uno1.png","uno2.png","uno3.png"]} />
             <Features features={["UNO gameplay","Multiplayer","2-8 player bot game","2-8 player multiplayer game"]} />
             
-            <div ref={videoRef} style={{display:"block",width: "96%",height:"50vw",marginInline: "auto",pointerEvents:"none"}}>
+            <div ref={videoRef} style={{display:"block",width: "98%",height:"50vw",marginInline: "auto",pointerEvents:"none"}}>
             <iframe style={{width: "100%",height: "100%"}} src="https://player.vimeo.com/video/1048192761?h=e877b91123&app_id=58479&muted=1&autoplay=1&loop=1&background=1" class="embed-content" frameBorder={0} ></iframe>
             </div>
             <Links frontend={"https://github.com/szt2bukarm/uno"} backend={"https://github.com/szt2bukarm/uno-server"} demo={"https://szt2bukarm.github.io/uno-prod/"} />

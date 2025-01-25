@@ -76,21 +76,12 @@ export default function Benjo() {
     
     useEffect(() => {
         setProjectTransition(false);
-
-        gsap.to(imageRef.current, {
-            filter: "brightness(300%)",
-            duration: 0.2,
-            delay: 2.3,
-            ease: "customEase",
-            onComplete: () => {
-                gsap.to(imageRef.current, {
-                    filter: "brightness(100%)",
-                    duration: 0.5,
-                    height: "0vh",
-                    ease: "customEase",
-                })
-            }
-        })
+            gsap.to(imageRef.current, {
+                duration: 0.5,
+                delay: 2.5,
+                height: "0vh",
+                ease: "customEase",
+            })
     }, [])
 
     useEffect(() => {
