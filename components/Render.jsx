@@ -6,22 +6,7 @@ import { DirectionalLight } from "three";
 import gsap from "gsap";
 import styled from "styled-components";
 import { useStore } from "@/store";
-
-const Wrapper = styled.div`
-    width: 50vw;
-    height: 100vh;
-    position: absolute;
-    left: 50vw;
-    top: 0;
-    pointer-events: none;
-
-    @media screen and (max-width: 1100px) {
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100vw;
-        height: 70vh;
-}`
+import styles from "./Render.module.css";
 
 const Model = ({ rotation }) => {
     const {model} = useStore();
@@ -76,7 +61,7 @@ export default function Render() {
     })
 
   return (
-    <Wrapper ref={wrapperRef}>
+    <div className={styles.wrapper} ref={wrapperRef}>
     <Canvas>
       <PerspectiveCamera
         makeDefault
@@ -86,6 +71,6 @@ export default function Render() {
       <ambientLight intensity={3} />
       <Model />
     </Canvas>
-    </Wrapper>
+    </div>
   );
 }

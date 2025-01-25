@@ -1,0 +1,46 @@
+.wrapper{
+    width: 100%;
+    min-height: 100%;
+    margin-inline: auto;
+    padding-inline: 20px;
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    flex-direction: column;
+    margin-bottom: 10px;
+}  
+
+
+.title{
+    font-size: var(--small5);
+    font-family: "Mori-SemiBold";
+    color: #c5c5c5;
+    margin-bottom: 5px;
+}
+
+
+.feature{
+    font-size: var(--small4);
+    display: inline-block;
+    font-family: "Mori-Regular";
+    color: #fff;
+    margin-block: 5px;
+    margin-right: 20px;
+    /* text-align: center; */
+}
+    
+
+.feature-list{
+    display: flex;
+    column-gap: 60px;
+    flex-wrap: wrap;
+}
+
+@media screen and (max-width: 768px) {
+    .feature-list{
+        flex-direction: column;
+    }
+    .feature{
+        display: block;
+    }
+}

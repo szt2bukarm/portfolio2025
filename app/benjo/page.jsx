@@ -16,26 +16,9 @@ import { useLenis } from "@studio-freight/react-lenis"
 import Name from "@/components/Name"
 gsap.registerPlugin(CustomEase)
 gsap.registerPlugin(ScrollTrigger)
+import styles from '../../public/ProjectPage.module.css'
 
 
-const Wrapper = styled.div`
-    width: 100vw;
-    min-height: 100%;
-    background-color: #000;
-`
-
-
-const ImageWrapper = styled.div`
-    width: 100vw;
-    height: 60vh;
-    filter: brightness(50%);
-`
-
-const Image = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-`
 
 export default function Benjo() {
     const lenis = useLenis();
@@ -117,12 +100,12 @@ export default function Benjo() {
 
 
     return (
-        <Wrapper ref={wrapperRef}>
+        <div className={styles.wrapper} ref={wrapperRef}>
             <Cover />
             <Name />
-            <ImageWrapper ref={imageRef}>
-                <Image src="benjo.jpg" alt="" />
-            </ImageWrapper>
+            <div className={styles.imageWrapper} ref={imageRef}>
+                <img className={styles.image} src="benjo.jpg" alt="" />
+            </div>
             <Title title={"Benjo"} stack={["HTML", "CSS", "JS","React","NodeJS"]} year={"2024"} platform={"Web"} />
             <Info title={"Benjo"} description={"Benjo is a music streaming app which takes Spotify metadata and matches it with the corresponding song on YouTube."} stack={["HTML", "CSS", "JS","React","NodeJS","Express","MongoDB","GSAP"]} year={"2024"} platform={"Web"} />
             <Images images={["benjo1.png","benjo2.png","benjo3.png"]} />
@@ -134,6 +117,6 @@ export default function Benjo() {
             <Links frontend={"https://github.com/szt2bukarm/Benjov2/"} backend={"https://github.com/szt2bukarm/BenjoAPI"} demo={"https://benjov2.netlify.app/"} />
 
             <Next project={"UNO"} slug={"uno"} image={"uno.jpg"} />
-        </Wrapper>
+        </div>
     )   
 }

@@ -1,0 +1,55 @@
+.wrapper {
+    width: 100vw;
+    min-height: 40vh;
+    min-height: 40dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    opacity: 0;
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        min-height: 30vh;
+        min-height: 30dvh;
+    }
+}
+
+.textWrapper {
+    min-height: 100%;
+    overflow: hidden;
+}
+
+.titleText {
+    font-size: var(--medium);
+    font-family: "Mori-SemiBold";
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .titleText {
+        font-size: var(--medium3);
+    }
+}
+
+.stackWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.stackIcon {
+    font-size: var(--small2);
+    width: var(--small2);
+    height: var(--small2);
+    color: #fff;
+}
+
+.metadata {
+    font-size: var(--small4);
+    font-family: "Mori-SemiBold";
+    color: #fff;
+}

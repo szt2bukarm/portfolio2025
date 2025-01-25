@@ -1,23 +1,7 @@
 import { useStore } from "@/store"
 import { usePathname, useRouter } from "next/navigation"
 import styled from "styled-components"
-
-const Text = styled.p`
-  font-size: var(--small5);
-  letter-spacing: 3px;
-  font-family: "Mori-SemiBold";
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  color: #fff;
-  z-index: 3;
-  mix-blend-mode: difference;
-
-  &:hover {
-      cursor: pointer;
-      color: #c5c5c5
-  }
-`
+import styles from "./Name.module.css"
 
 export default function Name () {
     const pathname = usePathname();
@@ -29,8 +13,8 @@ export default function Name () {
     }
 
     return (
-        <Text onClick={handleClick}>
+        <p className={styles.text} onClick={handleClick}>
             BUKVIC ARMIN
-        </Text>
+        </p>
     )
 }

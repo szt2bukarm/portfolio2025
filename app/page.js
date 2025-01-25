@@ -7,37 +7,10 @@ import CustomEase from "gsap/CustomEase";
 import gsap from "gsap";
 import { useStore } from "@/store";
 import Cover from "@/components/Cover";
-import About from "@/components/About";
 import { usePathname, useRouter } from "next/navigation";
 gsap.registerPlugin(CustomEase);
+import styles from "./Page.module.css";
 
-const Name = styled.p`
-  font-size: var(--small5);
-  letter-spacing: 3px;
-  font-family: "Mori-SemiBold";
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  color: #fff;
-  z-index: 3;
-`;
-
-const AboutButton = styled.p`
-  font-size: var(--small5);
-  letter-spacing: 3px;
-  font-family: "Mori-SemiBold";
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  color: #fff;
-  z-index: 3;
-  transition: color 0.3s ease;
-
-  &:hover {
-    cursor: pointer;
-    color: #c5c5c5;
-  }
-`;
 
 export default function PageWrapper({children}) {
   const pathname = usePathname();
@@ -88,11 +61,11 @@ export default function PageWrapper({children}) {
     <div>
       <Cover />
       {pathname == "/" && 
-      <Name ref={nameRef}>BUKVIC ARMIN</Name>
+      <p className={styles.name} ref={nameRef}>BUKVIC ARMIN</p>
       }
-      <AboutButton ref={aboutRef} onClick={handleAboutClick}>
+      <div className={styles.aboutButton} ref={aboutRef} onClick={handleAboutClick}>
         ABOUT
-      </AboutButton>
+      </div>
       {pathname === "/" ? <Projects /> : children}
     </div>
   );

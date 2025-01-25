@@ -1,0 +1,181 @@
+/* AuroraEffect.css */
+
+/* Define keyframes for the aurora animation */
+@keyframes auroraAnimation {
+    50% {
+      background-position: 50% 50%;
+    }
+  }
+  
+  /* AuroraEffect Styles */
+  .auroraEffect {
+    --white: #fff;
+    --black: #000;
+    --color1: rgba(246, 140, 59, 0.56);
+    --color2: rgba(248, 238, 129, 0.53);
+    --color3: rgba(253, 237, 147, 0.5);
+    --color4: rgba(253, 181, 181, 0.46);
+    --color5: rgba(250, 96, 96, 0.5);
+    --transparent: rgba(0, 0, 0, 0);
+  
+    --white-gradient: repeating-linear-gradient(
+      110deg,
+      var(--white) 0%,
+      var(--white) 7%,
+      var(--transparent) 10%,
+      var(--transparent) 12%,
+      var(--white) 16%
+    );
+    --dark-gradient: repeating-linear-gradient(
+      110deg,
+      var(--black) 0%,
+      var(--black) 7%,
+      var(--transparent) 10%,
+      var(--transparent) 12%,
+      var(--black) 16%
+    );
+    --aurora: repeating-linear-gradient(
+      110deg,
+      var(--color1) 10%,
+      var(--color2) 15%,
+      var(--color3) 20%,
+      var(--color4) 25%,
+      var(--color5) 30%
+    );
+  
+    position: fixed;
+    inset: -10px;
+    background-image: var(--white-gradient), var(--aurora);
+    background-size: 300%, 200%;
+    background-position: 50% 50%, 50% 50%;
+    opacity: 0.3;
+    filter: blur(10px) invert(1);
+    pointer-events: none;
+    will-change: transform;
+    mask-image: radial-gradient(
+      ellipse at 100% 0%,
+      black 10%,
+      var(--transparent) 70%
+    );
+  }
+  
+  .auroraEffect.dark {
+    background-image: var(--dark-gradient), var(--aurora);
+    filter: blur(10px) invert(0);
+  }
+  
+  .auroraEffect::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: var(--white-gradient), var(--aurora);
+    background-size: 200%, 100%;
+    background-attachment: fixed;
+    mix-blend-mode: difference;
+    animation: auroraAnimation 60s infinite linear;
+  }
+  
+  .auroraEffect.dark::after {
+    background-image: var(--dark-gradient), var(--aurora);
+  }
+  
+  /* Wrapper Styles */
+  .wrapper {
+    top: 0;
+    margin-top: 200px;
+    width: 100vw;
+    padding: 20px;
+    min-height: 100%;
+    pointer-events: auto;
+    opacity: 0;
+  }
+  
+  @media screen and (max-width: 1100px) {
+    .wrapper {
+      margin-top: 70px;
+    }
+  }
+  
+  /* SubTitle Styles */
+  .subTitle {
+    font-size: var(--small5);
+    font-family: "Mori-Regular";
+    color: #c5c5c5;
+    margin-bottom: 5px;
+  }
+  
+  /* SubText Styles */
+  .subText {
+    font-size: var(--small4);
+    font-family: "Mori-Regular";
+    color: #ffffff;
+  }
+  
+  /* AboutMe Styles */
+  .aboutMe {
+    width: 520px;
+    text-align: justify;
+    margin-bottom: 50px;
+  }
+  
+  @media screen and (max-width: 1100px) {
+    .aboutMe {
+      width: 100%;
+    }
+  }
+  
+  /* Skills Styles */
+  .skills {
+    width: 250px;
+    margin-bottom: 50px;
+  }
+  
+  @media screen and (max-width: 1100px) {
+    .skills {
+      width: 100%;
+    }
+  }
+  
+  /* SkillsWrapper Styles */
+  .skillsWrapper {
+    display: flex;
+    gap: 20px;
+  }
+  
+  @media screen and (max-width: 1100px) {
+    .skillsWrapper {
+      flex-direction: column;
+    }
+  }
+  
+  /* Contact Styles */
+  .contact {
+    width: 500px;
+  }
+  
+  @media screen and (max-width: 1100px) {
+    .contact {
+      width: 100%;
+    }
+  }
+  
+  /* Link Styles */
+  .link {
+    font-size: var(--small4);
+    font-family: "Mori-Regular";
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+    margin-right: 20px;
+  }
+  
+  .link:hover {
+    text-decoration: underline;
+  }
+  
+  @media screen and (max-width: 1100px) {
+    .link {
+      display: block;
+    }
+  }
+  

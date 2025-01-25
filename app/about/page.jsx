@@ -7,179 +7,7 @@ import { useLenis } from "@studio-freight/react-lenis";
 import Name from "@/components/Name";
 import { usePathname } from "next/navigation";
 import Render from "@/components/Render";
-
-// Define keyframes for the aurora animation
-const auroraAnimation = keyframes`
-  50% {
-    background-position: 50% 50%;
-  }
-`;
-
-// Styled-component for the aurora effect
-const AuroraEffect = styled.div`
-  --white: #fff;
-  --black: #000;
-  --color1: rgba(246, 140, 59, 0.56);
-  --color2: rgba(248, 238, 129, 0.53);
-  --color3: rgba(253, 237, 147, 0.5);
-  --color4: rgba(253, 181, 181, 0.46);
-  --color5: rgba(250, 96, 96, 0.5);
-  --transparent: rgba(0, 0, 0, 0);
-
-  --white-gradient: repeating-linear-gradient(
-    110deg,
-    var(--white) 0%,
-    var(--white) 7%,
-    var(--transparent) 10%,
-    var(--transparent) 12%,
-    var(--white) 16%
-  );
-  --dark-gradient: repeating-linear-gradient(
-    110deg,
-    var(--black) 0%,
-    var(--black) 7%,
-    var(--transparent) 10%,
-    var(--transparent) 12%,
-    var(--black) 16%
-  );
-  --aurora: repeating-linear-gradient(
-    110deg,
-    var(--color1) 10%,
-    var(--color2) 15%,
-    var(--color3) 20%,
-    var(--color4) 25%,
-    var(--color5) 30%
-  );
-
-  position: fixed;
-  inset: -10px;
-  background-image: var(--white-gradient), var(--aurora);
-  background-size: 300%, 200%;
-  background-position: 50% 50%, 50% 50%;
-  opacity: 0.3;
-  filter: blur(10px) invert(1);
-  pointer-events: none;
-  will-change: transform;
-  mask-image: radial-gradient(
-    ellipse at 100% 0%,
-    black 10%,
-    var(--transparent) 70%
-  );
-
-  &.dark {
-    background-image: var(--dark-gradient), var(--aurora);
-    filter: blur(10px) invert(0);
-  }
-
-  &::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background-image: var(--white-gradient), var(--aurora);
-    background-size: 200%, 100%;
-    background-attachment: fixed;
-    mix-blend-mode: difference;
-    animation: ${auroraAnimation} 60s infinite linear;
-  }
-
-  &.dark::after {
-    background-image: var(--dark-gradient), var(--aurora);
-  }
-`;
-
-const Wrapper = styled.div`
-    top: 0;
-    margin-top: 200px;
-    width: 100vw;
-    padding: 20px;
-    min-height: 100%;
-    pointer-events: auto;
-    opacity: 0;
-
-    @media screen and (max-width: 1100px) {
-        margin-top: 70px;
-    }
-`
-
-// const Content = styled.div`
-//     /* height: calc(100dvh - 200px); */
-//     width: 100%;
-//     overflow-x: hidden;
-//     overflow-y: scroll;
-// `
-
-const SubTitle = styled.p`
-    font-size: var(--small5);
-    font-family: "Mori-Regular";
-    color: #c5c5c5;
-    margin-bottom: 5px;
-`
-
-const SubText = styled.p`
-    font-size: var(--small4);
-    font-family: "Mori-Regular";
-    color: #ffffff;
-`
-
-const AboutMe = styled.div`
-    width: 520px;
-    text-align: justify;
-    margin-bottom: 50px;
-
-    @media screen and (max-width: 1100px) {
-        width: 100%;
-    }
-`
-
-const Skills = styled.div`
-    width: 250px;
-    margin-bottom: 50px;
-
-    @media screen and (max-width: 1100px) {
-        width: 100%;
-    }
-`
-
-const SkillsWrapper = styled.div`
-    display: flex;
-    gap: 20px;
-
-    @media screen and (max-width: 1100px) {
-        flex-direction: column;
-    }
-`
-
-const Contact = styled.div`
-    width: 500px;
-
-    @media screen and (max-width: 1100px) {
-        width: 100%;
-
-    }
-`
-
-const Link = styled.a`
-    font-size: var(--small4);
-    font-family: "Mori-Regular";
-    color: #fff;
-    text-decoration: none;
-    cursor: pointer;
-    margin-right: 20px;
-
-    &:hover {
-        text-decoration: underline;
-    }
-
-    @media screen and (max-width: 1100px) {
-        display: block;
-    }
-`
-
-const Scroll = styled.div`
-    width: 100%;
-    height: calc(100vh - 300px);
-    overflow-y: scroll;
-`
+import styles from './About.module.css'
 
 export default function About() {
     const {setAbout} = useStore();
@@ -240,35 +68,35 @@ export default function About() {
     },[])
 
     return (
-        <Wrapper ref={wrapperRef}>
-            <AuroraEffect />
+        <div className={styles.wrapper} ref={wrapperRef}>
+            <div className={styles.auroraEffect} />
             <Name />
             {/* <Scroll> */}
             <Render />
-            <AboutMe>
-                <SubTitle>ABOUT</SubTitle>
-                <SubText>{AboutText1.split(" ").map((word, index) => <span ref={(el) => text1Ref.current[index] = el} key={index}>{word} </span>)}</SubText><br></br>
-                <SubText>{AboutText2.split(" ").map((word, index) => <span ref={(el) => text2Ref.current[index] = el} key={index}>{word} </span>)}</SubText>
-            </AboutMe>
-            <SkillsWrapper>
-            <Skills>
-                <SubTitle>SKILLS | Frontend</SubTitle>
-                {Frontend.map((skill, index) => <SubText ref={(el) => frontendRef.current[index] = el} key={index}>{skill}</SubText>)}
-            </Skills>
-            <Skills>
-                <SubTitle>SKILLS | Backend</SubTitle>
-                {Backend.map((skill, index) => <SubText ref={(el) => backendRef.current[index] = el} key={index}>{skill}</SubText>)}
-            </Skills>
-            </SkillsWrapper>
-            <Contact>
-                <SubTitle>CONTACT</SubTitle>
-                <Link href="https://linkedin.com/in/%C3%A1rmin-bukvity-0652261b8/" target="_blank">LinkedIn</Link>
-                <Link href="https://github.com/szt2bukarm" target="_blank">GitHub</Link>
-                <Link href="https://www.instagram.com/arminbukvic/" target="_blank">Instagram</Link>
-                <Link href="https://facebook.com/armin.bukvic.39" target="_blank">Facebook</Link>
-                <Link href="mailto:bukvicarmin@gmail.com">Email</Link>
-            </Contact>
+            <div className={styles.aboutMe}>
+                <div className={styles.subTitle}>ABOUT</div>
+                <div className={styles.subText}>{AboutText1.split(" ").map((word, index) => <span ref={(el) => text1Ref.current[index] = el} key={index}>{word} </span>)}</div><br></br>
+                <div className={styles.subText}>{AboutText2.split(" ").map((word, index) => <span ref={(el) => text2Ref.current[index] = el} key={index}>{word} </span>)}</div>
+            </div>
+            <div className={styles.skillsWrapper}>
+            <div className={styles.skills}>
+                <div className={styles.subTitle}>SKILLS | Frontend</div>
+                {Frontend.map((skill, index) => <p className={styles.subText} ref={(el) => frontendRef.current[index] = el} key={index}>{skill}</p>)}
+            </div>
+            <div className={styles.skills}>
+                <div className={styles.subTitle}>SKILLS | Backend</div>
+                {Backend.map((skill, index) => <p className={styles.subText} ref={(el) => backendRef.current[index] = el} key={index}>{skill}</p>)}
+            </div>
+            </div>
+            <div className={styles.contact}>
+                <div className={styles.subTitle}>CONTACT</div>
+                <a className={styles.link} href="https://linkedin.com/in/%C3%A1rmin-bukvity-0652261b8/" target="_blank">LinkedIn</a>
+                <a className={styles.link} href="https://github.com/szt2bukarm" target="_blank">GitHub</a>
+                <a className={styles.link} href="https://www.instagram.com/arminbukvic/" target="_blank">Instagram</a>
+                <a className={styles.link} href="https://facebook.com/armin.bukvic.39" target="_blank">Facebook</a>
+                <a className={styles.link} href="mailto:bukvicarmin@gmail.com">Email</a>
+            </div>
             {/* </Scroll> */}
-        </Wrapper>
+        </div>
     )
 }

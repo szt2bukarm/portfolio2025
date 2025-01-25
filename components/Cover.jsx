@@ -6,35 +6,7 @@ import { useStore } from "@/store";
 import { usePathname, useRouter } from "next/navigation";
 import { useGLTF } from "@react-three/drei";
 gsap.registerPlugin(CustomEase);
-
-const Wrapper = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  height: 100dvh;
-  z-index: 5;
-  background-color: #161616;
-  /* clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); */
-  rotate: 180deg;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-size: 24px;
-  font-family: Arial, sans-serif;
-`;
-
-const Loader = styled.p`
-    font-size: var(--medium);
-    font-family: "Mori-SemiBold";
-    color: #fff;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) rotate(180deg);
-`
+import styles from "./Cover.module.css";
 
 const fileNames = [
   "benjo.jpg",
@@ -58,7 +30,7 @@ export default function Cover() {
   const router = useRouter();
   let scene;
   if(typeof window !== "undefined") {
-     scene = useGLTF("model2.glb").scene;
+     scene = useGLTF("model.glb").scene;
   }
   const [hideLoader,setHideLoader] = useState(loaded);
   gsap.registerEase("customEase", "M0,0 C0.075,0.82 0.165,1 1,1");
@@ -152,8 +124,8 @@ export default function Cover() {
   return (
     <>
     {!hideLoader && (
-        <Wrapper ref={coverRef}>
-        </Wrapper>
+        <div className={styles.wrapper} ref={coverRef}>
+        </div>
     )}
     </>
   );

@@ -10,107 +10,8 @@ import { useRouter } from "next/navigation"
 import { useLenis } from "@studio-freight/react-lenis"
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(CustomEase)
+import styles from "./Projects.module.css"
 
-
-const Wrapper = styled.div`
-    position: relative;
-    width: 100vw;
-    min-height: 100%;
-    background-color: #000;
-`
-
-const BackgroundBlur = styled.div`
-    position: fixed;
-    top: 0;
-    filter: blur(30px);
-    opacity: 0.3;
-    width: 100vw;
-    /* height: 100vh; */
-    /* height: 100dvh; */
-    overflow: hidden;
-    z-index: 0;
-`
-
-const BackgroundImage = styled.img`
-    width: 100%;
-    height: 100%;
-    scale: 1.5;
-    object-fit: cover;
-`
-
-const ProjectWrapper = styled.div`
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-    padding-block: calc(50vh - 325px); 
-    /* padding-block: calc(50dvh - 325px); */
-    background-color: #0000008a;
-
-    @media screen and (max-width: 768px) {
-        padding-block: calc(50vh - 200px);
-        /* padding-block: calc(50dvh - 200px); */
-    }
-
-`
-
-const ProjectList = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 200px;
-    /* padding-bottom: 500px; */
-    perspective: 300px;
-
-    @media screen and (max-width: 768px) {
-        gap: 20px;
-    }
-`
-
-const ProjectInfo = styled.div`
-    height: 100vh;
-    width: 100%;
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0 0 20px #000);
-    z-index: 2;
-    text-align: center;
-    font-family: "Mori-SemiBold";
-    pointer-events: none;
-    padding-inline: 20px;
-`
-
-const Title = styled.p`
-    font-size: var(--medium);
-    color: #fff;
-
-    @media screen and (max-width: 768px) {
-        font-size: var(--medium2);
-    }
-`
-
-const StackIcon = styled.span`
-    font-size: var(--small2);
-    width: var(--small2);
-    height: var(--small2);
-    color: #fff;
-    z-index: 2;
-`
-
-const Stack = styled.div`
-    display: flex;
-    gap: 10px;
-    margin-bottom: 10px;
-`
-
-const Metadata = styled.p`
-    font-size: var(--small4);
-    color: #fff;
-`
 
 const list = [
     {
@@ -329,14 +230,14 @@ export default function Projects() {
     },[about])
 
     return (
-        <Wrapper ref={wrapperRef}>
+        <div className={styles.wrapper} ref={wrapperRef}>
             {bgVisible && (
-                <BackgroundBlur ref={bgRef}>
-                    <BackgroundImage src={list[currentIndex].image} />
-                </BackgroundBlur>
+                <div className={styles.backgroundBlur} ref={bgRef}>
+                    <img className={styles.background} src={list[currentIndex].image} />
+                </div>
             )}
-            <ProjectWrapper>
-                <ProjectList ref={listRef}>
+            <div className={styles.projectWrapper}>
+                <div className={styles.projectList} ref={listRef}>
                     {list.map((project,i) => {
                         return (
                             <div key={i} ref={(el) => projectRef.current[i] = el} onClick={addPadding}>
@@ -344,11 +245,11 @@ export default function Projects() {
                             </div>
                         )
                     })}
-                </ProjectList>
-            </ProjectWrapper>
-            <ProjectInfo ref={infoRef}>
-                <Title >{currentText}</Title>
-                <Stack>
+                </div>
+            </div>
+            <div className={styles.projectInfo} ref={infoRef}>
+                <p className={styles.title} >{currentText}</p>
+                <div className={styles.stack}>
                 {currentStack.map((stack, i) => {
                     const IconComponent = {
                         HTML: FaHtml5,
@@ -357,17 +258,17 @@ export default function Projects() {
                         React: FaReact,
                         NodeJS: FaNodeJs,
                         ReactNative: TbBrandReactNative,
-                    }[stack]; // Dynamically retrieve the icon component
+                    }[stack];
 
                     return IconComponent ? (
-                        <StackIcon key={i}>
+                        <span className={styles.stackIcon} key={i}>
                             {React.createElement(IconComponent)}
-                        </StackIcon>
+                        </span>
                     ) : null; // Render nothing if the icon is not found
                 })}
-                </Stack>
-                <Metadata>{currentPlatform} - {currentYear}</Metadata>
-            </ProjectInfo>
-        </Wrapper>
+                </div>
+                <p className={styles.metadata}>{currentPlatform} - {currentYear}</p>
+            </div>
+        </div>
     )
 }

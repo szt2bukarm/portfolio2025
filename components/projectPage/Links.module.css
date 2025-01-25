@@ -1,0 +1,46 @@
+/* Links.module.css */
+
+.wrapper {
+    width: 96%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-inline: auto;
+    gap: 10px;
+    margin-top: 40px;
+    margin-bottom: 150px;
+}
+
+@media screen and (max-width: 470px) {
+    .wrapper {
+        flex-direction: column;
+        margin-top: 30px;
+    }
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border: 2px solid rgba(255, 255, 255, .5);
+    background: none;
+    font-size: var(--small4);
+    font-family: "Mori-SemiBold";
+    color: #c5c5c5;
+    cursor: pointer;
+    padding: 10px 30px;
+    border-radius: 50px;
+    transition: all 0.3s cubic-bezier(.075, .82, .165, 1);
+}
+
+@media screen and (max-width: 768px) {
+    .button {
+        font-size: var(--small5);
+    }
+}
+
+.button:hover {
+    border: 2px solid #fff;
+    color: #fff;
+}

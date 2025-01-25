@@ -1,0 +1,101 @@
+.wrapper {
+    position: relative;
+    width: 100vw;
+    min-height: 100%;
+    background-color: #000;
+}
+
+.backgroundBlur {
+    position: fixed;
+    top: 0;
+    filter: blur(30px);
+    opacity: 0.3;
+    width: 100vw;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.backgroundImage {
+    width: 100%;
+    height: 100%;
+    scale: 1.5;
+    object-fit: cover;
+}
+
+.projectWrapper {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 1;
+    padding-block: calc(50vh - 325px); 
+    background-color: #0000008a;
+}
+
+.projectList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 200px;
+    perspective: 300px;
+}
+
+.projectListSmall {
+    gap: 20px;
+}
+
+.projectInfo {
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 0 20px #000);
+    z-index: 2;
+    text-align: center;
+    font-family: "Mori-SemiBold";
+    pointer-events: none;
+    padding-inline: 20px;
+}
+
+.title {
+    font-size: var(--medium);
+    color: #fff;
+}
+
+.titleSmall {
+    font-size: var(--medium2);
+}
+
+.stackIcon {
+    font-size: var(--small2);
+    width: var(--small2);
+    height: var(--small2);
+    color: #fff;
+    z-index: 2;
+}
+
+.stack {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.metadata {
+    font-size: var(--small4);
+    color: #fff;
+}
+
+@media screen and (max-width: 768px) {
+    .projectWrapper {
+        padding-block: calc(50vh - 200px);
+    }
+    .projectList {
+        gap: 20px;
+    }
+    .title {
+        font-size: var(--medium2);
+    }
+}

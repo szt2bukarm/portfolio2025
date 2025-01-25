@@ -1,31 +1,13 @@
-import styled from "styled-components";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import { useEffect, useRef } from "react";
+import styles from './Images.module.css'; // Import the CSS Module
 
 gsap.registerPlugin(ScrollTrigger);
-
-const Wrapper = styled.div`
-    width: 100vw;
-    min-height: 100%;
-    padding-inline: 20px;
-`;
-
-const Image = styled.img`
-    display: block;
-    width: 100%;
-    height: 100%;
-    margin-inline: auto;
-    margin-bottom: 20px;
-    opacity: 0; /* Start hidden */
-    transform: translateY(50px); /* Start slightly off-screen */
-`;
 
 export default function Images({ images }) {
     const wrapperRef = useRef(null);
     const imagesRef = useRef([]);
-
-
 
     useEffect(() => {
         setTimeout(() => {
@@ -56,14 +38,15 @@ export default function Images({ images }) {
     }, [images]);
 
     return (
-        <Wrapper ref={wrapperRef}>
+        <div className={styles.wrapper} ref={wrapperRef}>
             {images.map((img, index) => (
-                <Image
+                <img
                     key={index}
+                    className={styles.image}
                     src={img}
                     ref={(el) => (imagesRef.current[index] = el)}
                 />
             ))}
-        </Wrapper>
+        </div>
     );
 }

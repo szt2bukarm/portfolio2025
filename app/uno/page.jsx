@@ -16,25 +16,8 @@ import { useLenis } from "@studio-freight/react-lenis"
 import Name from "@/components/Name"
 gsap.registerPlugin(CustomEase)
 gsap.registerPlugin(ScrollTrigger)
+import styles from '../../public/ProjectPage.module.css'
 
-const Wrapper = styled.div`
-    width: 100vw;
-    min-height: 100%;
-    background-color: #000;
-`
-
-
-const ImageWrapper = styled.div`
-    width: 100vw;
-    height: 60vh;
-    filter: brightness(50%);
-`
-
-const Image = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-`
 
 export default function Uno() {
     const lenis = useLenis();
@@ -111,12 +94,12 @@ export default function Uno() {
 
 
     return (
-        <Wrapper ref={wrapperRef}>
+        <div className={styles.container} ref={wrapperRef}>
             <Cover />
             <Name />
-            <ImageWrapper ref={imageRef}>
-                <Image src="uno.jpg" alt="" />
-            </ImageWrapper>
+            <div className={styles.imageWrapper} ref={imageRef}>
+                <img className={styles.image} src="uno.jpg" alt="" />
+            </div>
             <Title title={"UNO"} stack={["HTML", "CSS", "JS","React","NodeJS"]} year={"2024"} platform={"Web"} />
             <Info title={"UNO"} description={"A recreation of the popular card game UNO written in React. Multiplayer games are also supported through the use of Socket.io."} stack={["HTML", "CSS", "JS","React","NodeJS","GSAP","Socket.io"]} year={"2024"} platform={"Web"} />
             <Images images={["uno1.png","uno2.png","uno3.png"]} />
@@ -128,6 +111,6 @@ export default function Uno() {
             <Links frontend={"https://github.com/szt2bukarm/uno"} backend={"https://github.com/szt2bukarm/uno-server"} demo={"https://szt2bukarm.github.io/uno-prod/"} />
 
             <Next project={"Benjo - iOS"} slug={"benjomobile"} image={"benjomobile.jpg"} />
-        </Wrapper>
+        </div>
     )   
 }

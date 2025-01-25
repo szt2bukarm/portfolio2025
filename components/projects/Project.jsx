@@ -6,31 +6,8 @@ import { useStore } from "@/store";
 import { useRouter } from "next/navigation";
 import { useLenis } from "@studio-freight/react-lenis";
 gsap.registerPlugin("CustomEase");
+import styles from "./Project.module.css"
 
-const Wrapper = styled.div`
-    width: 50vw;
-    height: 650px;
-    z-index: 1;
-    border-radius: 20px;
-    overflow: hidden;
-    transition: filter 0.2s;
-
-    &:hover {
-        cursor: pointer;
-        filter: brightness(120%);
-    }
-
-    @media screen and (max-width: 768px) {
-        width: 90vw;
-        height: 400px;
-    }
-    `
-
-const Image = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-`
 
 
 
@@ -90,8 +67,8 @@ export default function Project({index,slug,image}) {
 
 
     return (
-        <Wrapper ref={wrapperRef} onClick={handleClick}>
-            <Image src={image} />
-        </Wrapper>
+        <div className={styles.wrapper} ref={wrapperRef} onClick={handleClick}>
+            <img className={styles.image} src={image} />
+        </div>
     )
 }
