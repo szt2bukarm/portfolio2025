@@ -121,6 +121,7 @@
   @media screen and (max-width: 1100px) {
     .aboutMe {
       width: 100%;
+      text-align: start;
     }
   }
   

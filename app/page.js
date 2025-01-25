@@ -63,9 +63,11 @@ export default function PageWrapper({children}) {
       {pathname == "/" && 
       <p className={styles.name} ref={nameRef}>BUKVIC ARMIN</p>
       }
-      <div className={styles.aboutButton} ref={aboutRef} onClick={handleAboutClick}>
-        ABOUT
-      </div>
+      {pathname !== "/about" && 
+          <div className={styles.aboutButton} ref={aboutRef} onClick={handleAboutClick}>
+            ABOUT
+          </div>
+      }
       {pathname === "/" ? <Projects /> : children}
     </div>
   );

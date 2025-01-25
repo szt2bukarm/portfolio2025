@@ -68,9 +68,10 @@ export default function About() {
     },[])
 
     return (
+        <>
+        <Name />
         <div className={styles.wrapper} ref={wrapperRef}>
             <div className={styles.auroraEffect} />
-            <Name />
             {/* <Scroll> */}
             <Render />
             <div className={styles.aboutMe}>
@@ -92,11 +93,10 @@ export default function About() {
                 <div className={styles.subTitle}>CONTACT</div>
                 <a className={styles.link} href="https://linkedin.com/in/%C3%A1rmin-bukvity-0652261b8/" target="_blank">LinkedIn</a>
                 <a className={styles.link} href="https://github.com/szt2bukarm" target="_blank">GitHub</a>
-                <a className={styles.link} href="https://www.instagram.com/arminbukvic/" target="_blank">Instagram</a>
-                <a className={styles.link} href="https://facebook.com/armin.bukvic.39" target="_blank">Facebook</a>
                 <a className={styles.link} href="mailto:bukvicarmin@gmail.com">Email</a>
             </div>
             {/* </Scroll> */}
         </div>
+        </>
     )
 }

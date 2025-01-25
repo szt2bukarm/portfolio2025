@@ -5,10 +5,11 @@ import styles from "./Name.module.css"
 
 export default function Name () {
     const pathname = usePathname();
-    const {setLowerCover,setAbout} = useStore();
+    const {setLowerCover,setAbout,setProjectTransition} = useStore();
 
     const handleClick = () => {
         if (pathname === "/about") setAbout(false);
+        setProjectTransition(false);
         setLowerCover(true);
     }
 
