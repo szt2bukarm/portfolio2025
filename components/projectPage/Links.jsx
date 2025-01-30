@@ -1,4 +1,4 @@
-import styles from './Links.module.css'; // Import the CSS Module
+import styles from './Links.module.css';
 
 export default function Links({ backend, frontend, demo }) {
     return (

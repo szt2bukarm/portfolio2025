@@ -1,11 +1,9 @@
 'use client'
 import gsap from "gsap"
 import { useStore } from "@/store"
-import { useEffect, useRef, useState } from "react"
-import styled, { keyframes } from "styled-components";
-import { useLenis } from "@studio-freight/react-lenis";
+import { useEffect, useRef } from "react"
+import { useGSAP } from "@gsap/react"
 import Name from "@/components/Name";
-import { usePathname } from "next/navigation";
 import Render from "@/components/Render";
 import styles from './About.module.css'
 
@@ -21,50 +19,47 @@ export default function About() {
     const Frontend = ["HTML/CSS","React","Next.JS","GSAP","Learning Three.JS"]
     const Backend = ["Node.JS","Express.JS","MongoDB","Know some mySQL","Websockets (socket.io)"]
 
-    useEffect(() => {
-            document.documentElement.style.backgroundColor = "#000000";
-            gsap.set(wrapperRef.current, {
-                opacity: 0,
-            })
-            gsap.set([text1Ref.current,text2Ref.current,frontendRef.current,backendRef.current], {
-                opacity: 0
-            })
-            gsap.to(wrapperRef.current, {
-                opacity: 1,
-                duration: 0.3,
-                delay: 0.3,
-            })
-            gsap.to([text1Ref.current], {
-                opacity: 1,
-                duration: 0.1,
-                stagger: 0.01,
-                delay: 0.3
-            })
-            gsap.to([text2Ref.current], {
-                opacity: 1,
-                duration: 0.1,
-                stagger: 0.01,
-                delay: 0.5
-            })
-            gsap.to(frontendRef.current, {
-                opacity: 1,
-                duration: 0.1,
-                stagger: 0.02,
-                delay: 0.7
-            })
-            gsap.to(backendRef.current, {
-                opacity: 1,
-                duration: 0.1,
-                stagger: 0.02,
-                delay: 0.9
-            })
-        }    
-    ,[])
+    useGSAP(() => {
+        document.documentElement.style.backgroundColor = "#000000";
+        gsap.set(wrapperRef.current, {
+            opacity: 0,
+        })
+        gsap.set([text1Ref.current,text2Ref.current,frontendRef.current,backendRef.current], {
+            opacity: 0
+        })
+        gsap.to(wrapperRef.current, {
+            opacity: 1,
+            duration: 0.3,
+            delay: 0.3,
+        })
+        gsap.to([text1Ref.current], {
+            opacity: 1,
+            duration: 0.1,
+            stagger: 0.01,
+            delay: 0.3
+        })
+        gsap.to([text2Ref.current], {
+            opacity: 1,
+            duration: 0.1,
+            stagger: 0.01,
+            delay: 0.5
+        })
+        gsap.to(frontendRef.current, {
+            opacity: 1,
+            duration: 0.1,
+            stagger: 0.02,
+            delay: 0.7
+        })
+        gsap.to(backendRef.current, {
+            opacity: 1,
+            duration: 0.1,
+            stagger: 0.02,
+            delay: 0.9
+        })
+    })
 
     useEffect(() => {
-        setTimeout(() => {
-            setAbout(false);
-        }, 500);
+        setAbout(false);
     },[])
 
     return (
@@ -72,7 +67,6 @@ export default function About() {
         <Name />
         <div className={styles.wrapper} ref={wrapperRef}>
             <div className={styles.auroraEffect} />
-            {/* <Scroll> */}
             <Render />
             <div className={styles.aboutMe}>
                 <div className={styles.subTitle}>ABOUT</div>
@@ -95,7 +89,6 @@ export default function About() {
                 <a className={styles.link} href="https://github.com/szt2bukarm" target="_blank">GitHub</a>
                 <a className={styles.link} href="mailto:bukvicarmin@gmail.com">Email</a>
             </div>
-            {/* </Scroll> */}
         </div>
         </>
     )

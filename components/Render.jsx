@@ -1,10 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera, useGLTF } from "@react-three/drei";
-import { useControls } from "leva";
-import { DirectionalLight } from "three";
 import gsap from "gsap";
-import styled from "styled-components";
+import { useGSAP } from "@gsap/react";
 import { useStore } from "@/store";
 import styles from "./Render.module.css";
 
@@ -38,21 +36,9 @@ const Model = ({ rotation }) => {
 };
 
 export default function Render() {
-//   const { x, y, z } = useControls("Camera Position", {
-//     x: { value: 5, min: -10, max: 10 },
-//     y: { value: 5, min: -10, max: 10 },
-//     z: { value: 5, min: -10, max: 10 },
-//   });
-
-//   const rotation = useControls("Model Rotation", {
-//     x: { value: 0, min: 0, max: Math.PI * 2 },
-//     y: { value: 0, min: 0, max: Math.PI * 2 },
-//     z: { value: 0, min: 0, max: Math.PI * 2 },
-//   });
-
     const wrapperRef = useRef(null);
 
-    useEffect(() => {
+    useGSAP(() => {
         gsap.to(wrapperRef.current, {
             opacity: 1,
             duration: 0.3,
@@ -67,7 +53,6 @@ export default function Render() {
         makeDefault
         position={[0, 0.6, 2.2]}
       />
-      {/* <directionalLight position={[-0.8, 0.8, 2.5]} intensity={1} /> */}
       <ambientLight intensity={3} />
       <Model />
     </Canvas>

@@ -9,15 +9,15 @@ gsap.registerPlugin(CustomEase);
 import styles from "./Cover.module.css";
 
 const fileNames = [
-  "benjo.jpg",
-  "uno.jpg",
-  "benjomobile.jpg",
-  "benjo1.png",
-  "uno1.png",
-  "benjo2.png",
-  "uno2.png",
-  "benjo3.png",
-  "uno3.png",
+  "benjo.webp",
+  "uno.webp",
+  "benjomobile.webp",
+  "benjo1.webp",
+  "uno1.webp",
+  "benjo2.webp",
+  "uno2.webp",
+  "benjo3.webp",
+  "uno3.webp",
 ];
 
 
@@ -44,7 +44,7 @@ export default function Cover() {
             setHideLoader(false);
             setTimeout(() => {
                 gsap.set(coverRef.current, {
-                    top: window.innerHeight * 1.3
+                    top: "100vh"
                 })
                 gsap.to(coverRef.current, {
                   top: 0,
@@ -84,7 +84,7 @@ export default function Cover() {
           img.onerror = () => {
             console.error(`Failed to load ${fileName}`);
             updateProgress();
-            resolve(); // Resolve even on error to avoid blocking the animation
+            resolve(); 
           };
         });
       });
@@ -96,7 +96,7 @@ export default function Cover() {
           top: 0
         });
         gsap.to(coverRef.current, {
-          top: window.innerHeight * -1.3,
+          top: "-100vh",
           duration: 1,
           delay: 0.25,
           ease: "customEase",
@@ -113,7 +113,7 @@ export default function Cover() {
   useEffect(() => {
     if (loaded) {
       gsap.to(coverRef.current, {
-        top: window.innerHeight * -1.3,
+        top: "-100vh",
         duration: 1,
         delay: 0.25,
         ease: "customEase",

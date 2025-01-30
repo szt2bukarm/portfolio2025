@@ -1,15 +1,10 @@
-import styled from "styled-components"
 import gsap from "gsap"
-import { CustomEase } from "gsap/all"
 import { useRef } from "react"
 import { useStore } from "@/store";
 import { useRouter } from "next/navigation";
 import { useLenis } from "@studio-freight/react-lenis";
 gsap.registerPlugin("CustomEase");
 import styles from "./Project.module.css"
-
-
-
 
 export default function Project({index,slug,image}) {
     const lenis = useLenis();
@@ -23,7 +18,6 @@ export default function Project({index,slug,image}) {
         lenis.stop();
         setClickedProject(index);
         setProjectTransition(true);
-        // window.history.pushState(null, "", "/" + slug);
         gsap.to(wrapperRef.current, {
             scale: 0.98,
             filter: "brightness(200%)",
@@ -42,16 +36,14 @@ export default function Project({index,slug,image}) {
             inline: "center"
         })
 
-
-
         gsap.to(wrapperRef.current, {
             width: "100vw",
             height: "60vh",
             borderRadius: 0,
             filter: "brightness(50%)",
-            duration: 1,
+            duration: 0.5,
             ease: "customEase",
-            delay: 1,
+            delay: 0.8,
             onUpdate: () => {
                 wrapperRef.current.scrollIntoView({
                   behavior: "auto",

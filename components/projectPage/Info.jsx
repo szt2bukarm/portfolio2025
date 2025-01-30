@@ -1,18 +1,18 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
-import styles from './Info.module.css'; // Import the CSS Module
+import { useGSAP } from "@gsap/react";
+import styles from './Info.module.css';
 
 export default function Info({ title, description, stack, year, platform }) {
     const ref = useRef(null);
 
-    useEffect(() => {
+    useGSAP(() => {
         gsap.set(ref.current, {
             opacity: 0
         })
         gsap.to(ref.current, {
             opacity: 1,
             duration: 0.3,
-            delay: 2.7
         })
     }, [])
 

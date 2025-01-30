@@ -3,7 +3,7 @@ import gsap from "gsap";
 import { CustomEase } from "gsap/all";
 import { useStore } from "@/store";
 import { useRouter } from "next/navigation";
-import styles from './Next.module.css'; // Import the CSS Module
+import styles from './Next.module.css'; 
 
 gsap.registerPlugin(CustomEase);
 
@@ -18,13 +18,11 @@ export default function Next({ project, slug, image }) {
         let rect;
         setProjectTransition(true);
         
-        // Scroll to the bottom of the page
         window.scrollTo({
             top: document.body.scrollHeight,
             behavior: "smooth"
         });
 
-        // Start animations after scrolling completes
         setTimeout(() => {
             gsap.to(textRef.current, {
                 opacity: 0,
@@ -32,7 +30,7 @@ export default function Next({ project, slug, image }) {
             });
             setTimeout(() => {
                 rect = wrapperRef.current.getBoundingClientRect();
-            }, 10);
+            }, 100);
             gsap.to(wrapperRef.current, {
                 filter: "brightness(200%)",
                 duration: 0.1,
@@ -53,7 +51,7 @@ export default function Next({ project, slug, image }) {
                     });
                 }
             });
-        }, 300); // Delay animations to allow scroll to complete
+        }, 300);
     };
 
     return (

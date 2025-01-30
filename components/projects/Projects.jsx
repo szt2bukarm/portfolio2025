@@ -1,4 +1,3 @@
-import styled from "styled-components"
 import Project from "./Project"
 import gsap from "gsap"
 import React, { useEffect, useRef, useState } from "react"
@@ -6,8 +5,8 @@ import { FaHtml5,FaCss3Alt,FaJs,FaReact,FaNodeJs } from 'react-icons/fa'
 import { TbBrandReactNative } from "react-icons/tb";
 import { CustomEase,ScrollTrigger } from "gsap/all"
 import { useStore } from "@/store"
-import { useRouter } from "next/navigation"
 import { useLenis } from "@studio-freight/react-lenis"
+import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger)
 gsap.registerPlugin(CustomEase)
 import styles from "./Projects.module.css"
@@ -16,7 +15,7 @@ import styles from "./Projects.module.css"
 const list = [
     {
         title: "Benjo",
-        image: "benjo.jpg",
+        image: "benjo.webp",
         stack: ["HTML","CSS","JS","React","NodeJS"],
         platform: "web",
         year: "2024",
@@ -24,7 +23,7 @@ const list = [
     },
     {
         title: "UNO",
-        image: "uno.jpg",
+        image: "uno.webp",
         stack: ["HTML","CSS","JS","React","NodeJS"],
         platform: "web",
         year: "2024",
@@ -32,7 +31,7 @@ const list = [
     },
     {
         title: "Benjo - iOS",
-        image: "benjomobile.jpg",
+        image: "benjomobile.webp",
         stack: ["JS","ReactNative","NodeJS"],
         platform: "mobile",
         year: "2024",
@@ -41,16 +40,13 @@ const list = [
 ]
 
 export default function Projects() {
-    const router = useRouter();
     gsap.registerEase("customEase","M0,0 C0.075,0.82 0.165,1 1,1")
-    const {projectTransition,clickedProject,setProjectTransition,loaded,about} = useStore();
-    const [tilt,setTilt] = useState();
+    const {projectTransition,clickedProject,loaded,about} = useStore();
     const [currentText,setCurrentText] = useState("Benjo");
     const [currentStack,setCurrentStack] = useState(["HTML","CSS","JS","React","NodeJS"]);
     const [currentPlatform,setCurrentPlatform] = useState("Web");
     const [currentYear,setCurrentYear] = useState("2024");
     const [currentIndex,setCurrentIndex] = useState(0);
-    const [lastScrollX, setLastScrollX] = useState(0);
     const [bgVisible,setBgVisible] = useState(true);
     const projectRef = useRef([]);
     const listRef = useRef(null);
@@ -81,12 +77,12 @@ export default function Projects() {
         };
     }, []);
 
-    useEffect(() => {
+    useGSAP(() => {
         if (projectTransition) {
             gsap.to([bgRef.current,infoRef.current,projectRef.current.filter((el,i) => i !== clickedProject)], {
                 opacity: 0,
                 delay: 0.5,
-                duration: 0.2,
+                duration: 0.1,
                 onComplete: () => {
                     setBgVisible(false);
                 }
@@ -101,34 +97,7 @@ export default function Projects() {
         }
     },[projectTransition])
 
-    useEffect(() => {
-        gsap.set(projectRef.current,{
-            transform: 'rotateX(0deg)',
-            delay: 0.5
-        })
-        gsap.set(projectRef.current,{
-            transform: 'rotateX(0deg)',
-        })
-    },[])
-
-    const handleScroll = (e) => {
-        if (screenWidth < 768) return;
-        const currentScrollX = document.documentElement.scrollTop;
-        const scrollDirection = currentScrollX - lastScrollX;
-
-        projectRef.current.forEach((el,i) => {
-            const skewValue = scrollDirection > 0 ? scrollDirection  * 0.1: 1 * scrollDirection * 0.1;
-            gsap.to(el, {
-                transform: 'rotateX(' + skewValue *-1 + 'deg)',
-                duration: 0.5,
-                // ease: "power1.out",
-                perspective: 1000
-            });
-        })
-        setLastScrollX(currentScrollX);
-    } 
-
-    useEffect(() => {
+    useGSAP(() => {
         if (!loaded){
             gsap.set(listRef.current, {
                 y: 200
@@ -146,7 +115,7 @@ export default function Projects() {
             })
     },[loaded])
 
-    useEffect(() => {
+    useGSAP(() => {
         gsap.set(infoRef.current, {
             opacity: 0
         })
@@ -158,7 +127,6 @@ export default function Projects() {
           gsap.to(infoRef.current, {
             css: {
                 opacity: 1,
-                // transform: 'translate(-50%, -91%)'
                 filter: screenWidth > 768 ? "blur(10px) drop-shadow(0 0 20px #000)" : ""
             },
             duration: 0.1,
@@ -185,7 +153,6 @@ export default function Projects() {
         }
         let scrollTriggers = [];
         if (!loaded) return;
-        setTimeout(() => {
             projectRef.current.forEach((el,i) => {
                 scrollTriggers[i] = ScrollTrigger.create({
                     trigger: el,
@@ -199,7 +166,10 @@ export default function Projects() {
                     }
                 })
             })
-        }, 750);
+
+            setTimeout(() => {
+                ScrollTrigger.refresh();
+            }, 700);
 
         return () => {
             scrollTriggers.forEach((el) => el.kill());
@@ -210,11 +180,11 @@ export default function Projects() {
         listRef.current.style.paddingBottom = "300px";
     }
 
-    useEffect(() => {
+    useGSAP(() => {
         if (about) {
             gsap.to(wrapperRef.current, {
                 opacity: 0,
-                duration: 0.5,
+                duration: 0.3,
                 onComplete: () => {
                     gsap.set(wrapperRef.current, {
                         display: "none"
@@ -224,7 +194,7 @@ export default function Projects() {
         } else {
             gsap.to(wrapperRef.current, {
                 opacity: 1,
-                duration: 0.5,
+                duration: 0.3,
             })
         }
     },[about])

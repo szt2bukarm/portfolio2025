@@ -1,24 +1,20 @@
 'use client'
-import Title from "@/components/projectPage/Title"
 import { useStore } from "@/store"
 import { useEffect, useRef } from "react"
-import styled from "styled-components"
 import { CustomEase,ScrollTrigger } from "gsap/all"
 import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
 import Info from "@/components/projectPage/Info"
 import Images from "@/components/projectPage/Images"
 import Features from "@/components/projectPage/Features"
 import Next from "@/components/projectPage/Next"
 import Cover from "@/components/Cover"
 import Links from "@/components/projectPage/Links"
-import { useRouter } from "next/navigation"
 import { useLenis } from "@studio-freight/react-lenis"
 import Name from "@/components/Name"
 gsap.registerPlugin(CustomEase)
 gsap.registerPlugin(ScrollTrigger)
 import styles from '../../public/ProjectPage.module.css'
-
-
 
 export default function Benjo() {
     const lenis = useLenis();
@@ -28,25 +24,24 @@ export default function Benjo() {
     const videoRef = useRef(null);
     const wrapperRef = useRef(null);
 
-    useEffect(() => {
-        if (about) {
-            gsap.to(wrapperRef.current, {
-                opacity: 0,
-                duration: 0.5
-            })
-        }
+    useGSAP(() => {
+        if (!about) return;
+        gsap.to(wrapperRef.current, {
+            opacity: 0,
+            duration: 0.3
+        })
     },[about])
     
     useEffect(() => {
         if (!lenis) return;
         setTimeout(() => {
-        lenis.scrollTo(0, {
-            immediate: true
-        });
-        lenis.stop();
-        setTimeout(() => {
-            lenis.start();
-        }, 3000);
+            lenis.scrollTo(0, {
+                immediate: true
+            });
+            lenis.stop();
+            setTimeout(() => {
+                lenis.start();
+            }, 500);
         }, 10);
     },[lenis])
     
@@ -55,47 +50,47 @@ export default function Benjo() {
     },[])
 
     useEffect(() => {
-        if (!lenis) return;
-
-    }, [lenis])
-
-    useEffect(() => {
         if (projectTransition) {
             lenis.stop();
         }
     }, [projectTransition])
     
-    useEffect(() => {
+
+    useGSAP(() => {
         setProjectTransition(false);
-            gsap.to(imageRef.current, {
-                duration: 0.5,
-                delay: 2.5,
-                height: "0vh",
-                ease: "customEase",
-            })
-    }, [])
+        gsap.to(imageRef.current, {
+            duration: 0.5,
+            delay: 0.3,
+            height: "0vh",
+            ease: "customEase",
+        })
+    })
+
+    useGSAP(() => {
+        gsap.fromTo(
+            videoRef.current,
+            {
+                opacity: 0,
+                y: 20,
+            },
+            {
+            opacity: 1,
+            y: 0,
+            duration: 0.5,
+            scrollTrigger: {
+                trigger: videoRef.current,
+                start: "top 70%",
+                end: "top 70%",
+                toggleActions: "play none none reverse",
+                
+            }
+        })
+    })
 
     useEffect(() => {
         setTimeout(() => {
-            gsap.fromTo(
-                videoRef.current,
-                {
-                    opacity: 0,
-                    y: 20,
-                },
-                {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                scrollTrigger: {
-                    trigger: videoRef.current,
-                    start: "top center",
-                    end: "top center",
-                    toggleActions: "play none none reverse",
-                    
-                }
-            })    
-        }, 3300);
+            ScrollTrigger.refresh();
+        }, 600);
     },[])
 
 
@@ -104,11 +99,11 @@ export default function Benjo() {
             <Cover />
             <Name />
             <div className={styles.imageWrapper} ref={imageRef}>
-                <img className={styles.image} src="benjo.jpg" alt="" />
+                <img className={styles.image} src="benjo.webp" alt="" />
             </div>
-            <Title title={"Benjo"} stack={["HTML", "CSS", "JS","React","NodeJS"]} year={"2024"} platform={"Web"} />
+            {/* <Title title={"Benjo"} stack={["HTML", "CSS", "JS","React","NodeJS"]} year={"2024"} platform={"Web"} /> */}
             <Info title={"Benjo"} description={"Benjo is a music streaming app which takes Spotify metadata and matches it with the corresponding song on YouTube."} stack={["HTML", "CSS", "JS","React","NodeJS","Express","MongoDB","GSAP"]} year={"2024"} platform={"Web"} />
-            <Images images={["benjo1.png","benjo2.png","benjo3.png"]} />
+            <Images images={["benjo1.webp","benjo2.webp","benjo3.webp"]} />
             <Features features={["Music playback","User authentication","Search","Abilty to like tracks/albums","Ability to create playlists","Abilty to correct tracks in case of invalid indexing","Music recommendation using the Last.FM API"]} />
             
             <div ref={videoRef} style={{display:"block",width: "98%",height:"50vw",marginInline: "auto",pointerEvents:"none"}}>
@@ -116,7 +111,7 @@ export default function Benjo() {
             </div>
             <Links frontend={"https://github.com/szt2bukarm/Benjov2/"} backend={"https://github.com/szt2bukarm/BenjoAPI"} demo={"https://benjov2.netlify.app/"} />
 
-            <Next project={"UNO"} slug={"uno"} image={"uno.jpg"} />
+            <Next project={"UNO"} slug={"uno"} image={"uno.webp"} />
         </div>
     )   
 }
